@@ -129,6 +129,14 @@ If someone commits prohibited phrases (e.g., “we solved global regularity,” 
 
 ---
 
+## ⚠️ Important Limitations (Scope Statement)
+
+This is a foundational toolkit. It provides **verifiable components** for building high-integrity simulations.
+
+However, by itself, this alpha kit **does not** produce legally admissible evidence or solve complex scientific problems (like global regularity for the Navier–Stokes equations). Achieving such results requires extensive, independent, peer-reviewed validation and adherence to domain-specific legal and scientific standards. Use this kit as a rigorous starting point for building those capabilities honestly.
+
+---
+
 ## 🗺️ Roadmap (Q4 2025)
 
 * 🔗 **Ledger**: Ethereum/Optimism RPC adapter + receipts.
