@@ -1,0 +1,18 @@
+{
+  "name": "PatientZero",
+  "traits": {
+    "conscientiousness": 0.6924501880107847,
+    "agreeableness": 0.5364150975998383,
+    "neuroticism": 0.6003768267082926,
+    "openness": 0.5226315925804543,
+    "extraversion": 0.4558790172354019
+  },
+  "history": [
+    "Institutional Betrayal"
+  ],
+  "scores": {
+    "resilience_index": 0.46665373328072357,
+    "moral_injury_index": 0.30355337668557314,
+    "institutional_trust": 0.3359633384502313
+  }
+}

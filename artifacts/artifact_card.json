@@ -1,0 +1,23 @@
+{
+  "name": "VALOR Genesis Engine \u2014 Alpha Kit",
+  "version": "v1",
+  "timestamp_utc": "2025-09-01T09:25:10Z",
+  "artifacts": {
+    "sovereign_ledger.json": {
+      "sha256": "f5a6aecee7edcaa5f79b4937c22f84163dbf768a64ad45fd7a0426a13b015d47",
+      "size": 265
+    },
+    "causal_trace.json": {
+      "sha256": "ffb05fe3cc0c83a3984991bd908c74c6675b6b940b11465bce63fdfa341d80f4",
+      "size": 1852
+    },
+    "manifest.json": {
+      "sha256": "3cfecb87637e1ca2dc6e509733a8587361317d6ed1a6911dcd79ad361349e10f",
+      "size": 15381
+    },
+    "MANIFEST_SHA256.txt": {
+      "sha256": "28f5faefeb3f6d2cf3e36bc63c1e2cda9619167f3e0ab33a95858fa1ebdfc422",
+      "size": 14441
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "hash": "81d3158cfea934ff19f5a18eb7adf470998b5eba19d539cb0c094d0a9fad42ee",
+  "record": {
+    "ts_utc": "2025-09-01T09:25:08Z",
+    "kind": "DECISION",
+    "metadata": {
+      "actor": "CI",
+      "details": "Approve Alpha"
+    }
+  }
+}

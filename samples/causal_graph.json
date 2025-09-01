@@ -1,0 +1,29 @@
+{
+  "nodes": [
+    "PolicyBlock",
+    "AccessDelay",
+    "Stress",
+    "Outcome"
+  ],
+  "edges": [
+    [
+      "PolicyBlock",
+      "AccessDelay"
+    ],
+    [
+      "AccessDelay",
+      "Stress"
+    ],
+    [
+      "Stress",
+      "Outcome"
+    ]
+  ],
+  "equations": {
+    "PolicyBlock": "PolicyBlock",
+    "AccessDelay": "0.7*PolicyBlock + eps",
+    "Stress": "0.8*AccessDelay + eps",
+    "Outcome": "-0.6*Stress + eps"
+  },
+  "outcome": "Outcome"
+}

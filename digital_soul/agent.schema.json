@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DigitalSoulAgent",
+  "type": "object",
+  "required": ["name", "traits", "history", "scores"],
+  "properties": {
+    "name": {"type": "string"},
+    "traits": {
+      "type": "object",
+      "properties": {
+        "conscientiousness": {"type": "number"},
+        "agreeableness": {"type": "number"},
+        "neuroticism": {"type": "number"},
+        "openness": {"type": "number"},
+        "extraversion": {"type": "number"}
+      },
+      "additionalProperties": false
+    },
+    "history": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "scores": {
+      "type": "object",
+      "properties": {
+        "resilience_index": {"type": "number"},
+        "moral_injury_index": {"type": "number"},
+        "institutional_trust": {"type": "number"}
+      },
+      "additionalProperties": false
+    }
+  }
+}
