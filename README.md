@@ -221,10 +221,3 @@ Use of blockchain anchoring/timestamping **does not** by itself confer legal adm
 
 ---
 
-### ✅ Final Checklist
-
-* [ ] Create `/bundles` and add **all six ZIPs** from the table (hashes above).
-* [ ] Put `docs/index.html` from **VALOR\_Genesis\_Engine\_Dashboard\_v1.zip** into `/docs`.
-* [ ] (Optional) Publish a **Release** with the same ZIPs + SHAs.
-* [ ] Enable **GitHub Pages** from `/docs`.
-* [ ] Commit this `README.md` and push.
