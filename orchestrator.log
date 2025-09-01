@@ -1,7 +1,0 @@
-[Genesis Orchestrator] registry loaded: {
-  "ledger": "ledger/local_ledger.py",
-  "digital_soul": "digital_soul",
-  "veracity": "veracity",
-  "causal": "causal"
-}
-This is a lightweight supervisor stub. Extend with process mgmt, queues, and policy.

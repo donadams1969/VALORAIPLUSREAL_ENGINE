@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+*.pyc
+
+# Generated artifacts
+artifacts/
+
+# Log files
+*.log
