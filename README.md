@@ -110,12 +110,22 @@ python tools/build_artifact_card.py --out artifacts
 * `tools/ed25519_sign.py` / `tools/sign_manifest.py` → signature file (`.sig`)
 * `tools/build_artifact_card.py` → `artifacts/artifact_card.json` (hashes + sizes)
 
-Verify signature:
+**Modular Verification (for third parties)**
+
+To verify the integrity of the signed artifacts, use the `tools/verify_signature.py` script. You will need three files: the public key, the manifest, and the signature file.
 
 ```bash
-python tools/ed25519_sign.py verify --pub keys/public.key \
-  --file artifacts/MANIFEST_SHA256.txt --sig artifacts/MANIFEST_SHA256.txt.sig
+# Ensure the required library is installed
+pip install ed25519
+
+# Run the verification
+python tools/verify_signature.py \
+  --key keys/signing.pub \
+  --file artifacts/MANIFEST_SHA256.txt \
+  --signature artifacts/MANIFEST_SHA256.txt.sig
 ```
+
+This provides a concrete, repeatable method for anyone to verify the integrity of your work.
 
 ---
 
