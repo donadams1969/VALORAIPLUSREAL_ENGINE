@@ -58,8 +58,6 @@
 | `NS_Verification_Kit_v2_proof_addon.zip`      | Projection/Poisson proof notes, demos, interval checks                  | `e1a582a1e990f340f24bb38951c2b7920141ce7f1b99d066d4929a1687437233` | [Download](sandbox:/mnt/data/NS_Verification_Kit_v2_proof_addon.zip)      |
 | `ValorProof_Claims_and_Signing_v1.zip`        | Claims policy, legal comms, Ed25519 signing toolkit                     | `ae9219cbfbae3ba13497610b03a84df0866538d0a9c9e14204a1e21e9b869971` | [Download](sandbox:/mnt/data/ValorProof_Claims_and_Signing_v1.zip)        |
 
-> 🧾 **Pro tip:** Upload these ZIPs as **Release assets** and paste the same SHA-256 values into your release notes.
-
 ---
 
 ## 🖥️ Exec Dashboard (GitHub Pages)
