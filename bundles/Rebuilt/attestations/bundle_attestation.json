@@ -1,0 +1,17 @@
+{
+  "bundle": "ValorAIPlus_Global_Proof_Package_Rebuilt.zip",
+  "issued_at": "2025-09-01T15:16:48Z",
+  "model": {
+    "name": "VALOR Claim-Guard (scaffold)",
+    "version": "0.1.0"
+  },
+  "evidence": [
+    "artifacts/VALORAIPLUS2E_Modular_Starter_v1.zip (optional)"
+  ],
+  "uncertainty": {
+    "interval": "n/a",
+    "lower": 0,
+    "upper": 0,
+    "notes": "bundle attestation scaffold"
+  }
+}
