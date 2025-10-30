@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 VALOR AI++//e UNIFIED TREASURY DASHBOARD</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
+    <style>
+        :root {
+            --gold-primary: #FFD700;
+            --gold-secondary: #FFA500;
+            --gold-accent: #FFF8DC;
+            --treasury-dark: #0a0a1a;
+            --treasury-darker: #050510;
+            --gold-glow: 0 0 20px var(--gold-primary),
+                         0 0 40px var(--gold-primary),
+                         0 0 60px var(--gold-primary);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--treasury-darker), var(--treasury-dark));
+            color: white;
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
+        }
+
+        .dashboard-container {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid var(--gold-primary);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .main-title {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--gold-primary), var(--gold-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: var(--gold-glow);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: var(--gold-primary);
+            opacity: 0.8;
+        }
+
+        .kernel-badge {
+            background: rgba(255, 215, 0, 0.2);
+            border: 1px solid var(--gold-primary);
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin: 10px 0;
+            display: inline-block;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .treasury-card {
+            background: rgba(10, 10, 26, 0.8);
+            border: 1px solid var(--gold-primary);
+            border-radius: 15px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .treasury-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--gold-glow);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .card-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--gold-primary);
+        }
+
+        .card-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--gold-primary), var(--gold-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 10px 0;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .metric-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .metric-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--gold-primary);
+            margin: 5px 0;
+        }
+
+        .revenue-stream {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .revenue-stream:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: scale(1.02);
+        }
+
+        .faucet-control {
+            background: linear-gradient(45deg, var(--gold-primary), var(--gold-secondary));
+            border: none;
+            color: black;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faucet-control:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .holding-tank {
+            background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,165,0,0.1));
+            border: 2px solid var(--gold-primary);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tank-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, var(--gold-primary), var(--gold-secondary));
+            transition: height 0.5s ease;
+        }
+
+        .gold-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--gold-primary);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- HEADER -->
+        <header class="dashboard-header">
+            <h1 class="main-title">🚀 VALOR AI++//e UNIFIED TREASURY</h1>
+            <div class="kernel-badge">
+                💎 KERNEL: valoraiplus2e_YHWH_5150_KERNEL_FINAL_RNG_LOCKED
+            </div>
+            <p class="subtitle">💰 SGAU 7226.3461 ACTIVE • ALL REVENUE STREAMS POURING • UNIFIED TREASURY OPERATIONAL</p>
+        </header>
+
+        <!-- MAIN DASHBOARD GRID -->
+        <div class="dashboard-grid">
+            <!-- TOTAL ASSETS -->
+            <div class="treasury-card">
+                <div class="card-header">
+                    <h2 class="card-title">💰 TOTAL ASSETS</h2>
+                    <div class="quantum-loader"></div>
+                </div>
+                <div class="card-value" id="totalAssets">$0</div>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-label">USD Value</div>
+                        <div class="metric-value" id="usdValue">$0</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">SGAU Value</div>
+                        <div class="metric-value" id="sgauValue">0</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Growth/Hour</div>
+                        <div class="metric-value" id="hourlyGrowth">$0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REVENUE VAULT -->
+            <div class="treasury-card">
+                <div class="card-header">
+                    <h2 class="card-title">🏦 REVENUE VAULT</h2>
+                    <div class="quantum-loader"></div>
+                </div>
+                <div class="card-value" id="vaultBalance">$0</div>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-label">Vault USD</div>
+                        <div class="metric-value" id="vaultUSD">$0</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Vault SGAU</div>
+                        <div class="metric-value" id="vaultSGAU">0</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Security</div>
+                        <div class="metric-value">🛡️</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REVENUE STREAMS -->
+            <div class="treasury-card">
+                <div class="card-header">
+                    <h2 class="card-title">🌊 REVENUE STREAMS</h2>
+                    <div class="quantum-loader"></div>
+                </div>
+                <div id="revenueStreamsContainer">
+                    <!-- Revenue streams will be populated here -->
+                </div>
+            </div>
+
+            <!-- HOLDING TANKS -->
+            <div class="treasury-card">
+                <div class="card-header">
+                    <h2 class="card-title">⚗️ HOLDING TANKS</h2>
+                    <div class="quantum-loader"></div>
+                </div>
+                <div id="holdingTanksContainer">
+                    <!-- Holding tanks will be populated here -->
+                </div>
+            </div>
+
+            <!-- MERGE STATUS -->
+            <div class="treasury-card">
+                <div class="card-header">
+                    <h2 class="card-title">🔄 MERGE STATUS</h2>
+                    <div class="quantum-loader"></div>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-label">Fort Valor Ai+</div>
+                        <div class="metric-value">✅</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Fort Valor Ai+//e</div>
+                        <div class="metric-value">✅</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Fort Valor Ai+2e</div>
+                        <div class="metric-value">✅</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Unified Treasury</div>
+                        <div class="metric-value">🚀</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REVENUE PROJECTIONS -->
+            <div class="treasury-card">
+                <div class="card-header">
+                    <h2 class="card-title">📈 PROJECTIONS</h2>
+                    <div class="quantum-loader"></div>
+                </div>
+                <div id="revenueProjections">
+                    <!-- Projections will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class UnifiedTreasuryDashboard {
+            constructor() {
+                this.websocket = null;
+                this.treasuryData = {};
+                this.init();
+            }
+
+            init() {
+                console.log('🚀 Initializing Unified Treasury Dashboard...');
+                this.connectWebSocket();
+                this.createGoldParticles();
+                this.startRealTimeUpdates();
+            }
+
+            connectWebSocket() {
+                this.websocket = new WebSocket('ws://localhost:8777');
+
+                this.websocket.onopen = () => {
+                    console.log('💎 Connected to Unified Treasury System');
+                    this.addStatusMessage('🔄 Connected to treasury kernel');
+                };
+
+                this.websocket.onmessage = (event) => {
+                    const data = JSON.parse(event.data);
+                    this.handleTreasuryData(data);
+                };
+
+                this.websocket.onclose = () => {
+                    console.log('🔌 Disconnected from treasury system');
+                    this.addStatusMessage('❌ Disconnected from treasury');
+                    // Attempt reconnect after 5 seconds
+                    setTimeout(() => this.connectWebSocket(), 5000);
+                };
+            }
+
+            handleTreasuryData(data) {
+                this.treasuryData = data;
+
+                switch(data.type) {
+                    case 'treasury_initial':
+                        this.updateDashboard(data.data);
+                        break;
+                    case 'treasury_update':
+                        this.updateDashboard(data.data);
+                        this.animateRevenueFlow();
+                        break;
+                    case 'treasury_detailed_report':
+                        this.updateDetailedView(data.data);
+                        break;
+                }
+            }
+
+            updateDashboard(treasuryData) {
+                // Update total assets
+                document.getElementById('totalAssets').textContent =
+                    `$${this.formatCurrency(treasuryData.treasury_summary.total_assets_usd)}`;
+                document.getElementById('usdValue').textContent =
+                    `$${this.formatCurrency(treasuryData.treasury_summary.total_assets_usd)}`;
+                document.getElementById('sgauValue').textContent =
+                    this.formatNumber(treasuryData.treasury_summary.total_assets_sgau);
+
+                // Update vault
+                document.getElementById('vaultBalance').textContent =
+                    `$${this.formatCurrency(treasuryData.treasury_summary.vault_balance_usd)}`;
+                document.getElementById('vaultUSD').textContent =
+                    `$${this.formatCurrency(treasuryData.treasury_summary.vault_balance_usd)}`;
+                document.getElementById('vaultSGAU').textContent =
+                    this.formatNumber(treasuryData.treasury_summary.vault_balance_sgau);
+
+                // Update revenue streams
+                this.updateRevenueStreams(treasuryData.revenue_streams);
+
+                // Update holding tanks
+                this.updateHoldingTanks(treasuryData.holding_tanks);
+
+                // Calculate hourly growth
+                const hourlyGrowth = Object.values(treasuryData.revenue_streams)
+                    .filter(stream => stream.faucet_open)
+                    .reduce((sum, stream) => sum + stream.flow_rate, 0);
+                document.getElementById('hourlyGrowth').textContent = `$${this.formatCurrency(hourlyGrowth)}`;
+            }
+
+            updateRevenueStreams(streams) {
+                const container = document.getElementById('revenueStreamsContainer');
+                container.innerHTML = '';
+
+                Object.entries(streams).forEach(([streamId, stream]) => {
+                    const streamElement = document.createElement('div');
+                    streamElement.className = 'revenue-stream';
+                    streamElement.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <strong>${this.formatStreamName(streamId)}</strong>
+                                <div>$${this.formatCurrency(stream.flow_rate)}/hour</div>
+                                <div style="color: ${stream.faucet_open ? '#00ff00' : '#ff0000'}">
+                                    ${stream.faucet_open ? '🟢 POURING' : '🔴 CLOSED'}
+                                </div>
+                            </div>
+                            <button class="faucet-control" onclick="treasuryDashboard.toggleFaucet('${streamId}')">
+                                ${stream.faucet_open ? 'CLOSE' : 'OPEN'}
+                            </button>
+                        </div>
+                    `;
+                    container.appendChild(streamElement);
+                });
+            }
+
+            updateHoldingTanks(tanks) {
+                const container = document.getElementById('holdingTanksContainer');
+                container.innerHTML = '';
+
+                Object.entries(tanks).forEach(([tankId, tank]) => {
+                    const fillPercentage = (tank.balance / tank.capacity) * 100;
+                    const tankElement = document.createElement('div');
+                    tankElement.className = 'holding-tank';
+                    tankElement.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <strong>${tankId.toUpperCase()}</strong>
+                            <span>${fillPercentage.toFixed(1)}%</span>
+                        </div>
+                        <div style="position: relative; height: 20px; background: rgba(255,215,0,0.2); border-radius: 10px; overflow: hidden;">
+                            <div class="tank-fill" style="height: ${fillPercentage}%"></div>
+                        </div>
+                        <div style="margin-top: 10px; font-size: 0.9em;">
+                            $${this.formatCurrency(tank.balance)} / $${this.formatCurrency(tank.capacity)}
+                        </div>
+                        <button class="faucet-control" onclick="treasuryDashboard.transferTank('${tankId}')"
+                                style="margin-top: 10px; padding: 5px 10px; font-size: 0.8em;">
+                            TRANSFER TO VAULT
+                        </button>
+                    `;
+                    container.appendChild(tankElement);
+                });
+            }
+
+            toggleFaucet(streamId) {
+                if (this.websocket) {
+                    const action = this.treasuryData.data?.revenue_streams?.[streamId]?.faucet_open ? 'close' : 'open';
+                    this.websocket.send(JSON.stringify({
+                        type: 'faucet_control',
+                        stream_id: streamId,
+                        action: action
+                    }));
+                }
+            }
+
+            transferTank(tankId) {
+                if (this.websocket) {
+                    this.websocket.send(JSON.stringify({
+                        type: 'transfer_request',
+                        tank_id: tankId
+                    }));
+                }
+            }
+
+            animateRevenueFlow() {
+                // Create gold particle effects for revenue flow
+                for (let i = 0; i < 5; i++) {
+                    this.createGoldParticle();
+                }
+            }
+
+            createGoldParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'gold-particle';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = '100vh';
+
+                document.body.appendChild(particle);
+
+                // Animate particle flowing upward
+                gsap.to(particle, {
+                    duration: 2,
+                    y: -100,
+                    x: () => Math.random() * 100 - 50,
+                    opacity: 1,
+                    scale: 1,
+                    ease: "power2.out",
+                    onComplete: () => {
+                        particle.remove();
+                    }
+                });
+            }
+
+            startRealTimeUpdates() {
+                // Request detailed report every 30 seconds
+                setInterval(() => {
+                    if (this.websocket && this.websocket.readyState === WebSocket.OPEN) {
+                        this.websocket.send(JSON.stringify({
+                            type: 'treasury_report'
+                        }));
+                    }
+                }, 30000);
+            }
+
+            formatCurrency(amount) {
+                if (amount >= 1000000000) {
+                    return (amount / 1000000000).toFixed(2) + 'B';
+                } else if (amount >= 1000000) {
+                    return (amount / 1000000).toFixed(2) + 'M';
+                } else if (amount >= 1000) {
+                    return (amount / 1000).toFixed(2) + 'K';
+                }
+                return amount.toFixed(2);
+            }
+
+            formatNumber(num) {
+                return num.toLocaleString('en-US', { maximumFractionDigits: 2 });
+            }
+
+            formatStreamName(streamId) {
+                return streamId.split('_').map(word =>
+                    word.charAt(0).toUpperCase() + word.slice(1)
+                ).join(' ');
+            }
+
+            addStatusMessage(message) {
+                console.log('💎 Treasury Status:', message);
+            }
+        }
+
+        // Initialize dashboard when page loads
+        let treasuryDashboard;
+        document.addEventListener('DOMContentLoaded', () => {
+            treasuryDashboard = new UnifiedTreasuryDashboard();
+        });
+    </script>
+</body>
+</html>
