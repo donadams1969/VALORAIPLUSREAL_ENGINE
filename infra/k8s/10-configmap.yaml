@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata: { name: proof-config, namespace: valor-proof }
-data:
-  APP_ENV: "prod"
-  valoraiplus_module_id: "VALORAIPLUS_V0_PROOF_v1.44g"
-  valoraiplus_GILLBTC: "VALORCHAIN-G::GHOST25"
-  valoraiplus_btc_txid: "0000000000000000000000000000000000000000000000000000000000000000"
