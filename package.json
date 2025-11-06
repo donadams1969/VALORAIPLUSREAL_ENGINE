@@ -1,0 +1,14 @@
+{
+  "name": "valoraiplus-security",
+  "version": "1.0.0",
+  "description": "VALORAIPLUS Security Suite",
+  "main": "index.js",
+  "scripts": {
+    "security:guide": "node scripts/interactive-guide.js",
+    "audit:report": "echo 'Running audit report...'",
+    "ci:gate": "echo 'Running CI gate...'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

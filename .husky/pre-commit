@@ -1,0 +1,27 @@
+#!/bin/sh
+# Stash unstaged changes to avoid scanning them
+git stash -q --keep-index --include-untracked
+
+echo "🔍 Running VALORAIPLUS Zero-Trust pre-commit checks..."
+
+# Check for hardcoded IP addresses (excluding localhost)
+HARDCODED_IP=$(grep -rE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' --exclude-dir=node_modules . | grep -v '127.0.0.1' || true)
+if [ -n "$HARDCODED_IP" ]; then
+    echo "🚫 COMMIT REJECTED: Hardcoded IP address found:"
+    echo "$HARDCODED_IP"
+    git stash pop -q
+    exit 1
+fi
+
+# Check for common service hostnames
+HARDCODED_HOSTNAME=$(grep -rE '\b(api\.|db\.|auth\.)[a-zA-Z0-9-]+\b' --exclude-dir=node_modules . || true)
+if [ -n "$HARDCODED_HOSTNAME" ]; then
+    echo "🚫 COMMIT REJECTED: Potential hardcoded service hostname found:"
+    echo "$HARDCODED_HOSTNAME"
+    git stash pop -q
+    exit 1
+fi
+
+echo "✅ All pre-commit checks passed."
+git stash pop -q
+exit 0

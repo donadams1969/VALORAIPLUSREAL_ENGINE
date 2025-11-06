@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+const fs = require('fs');
+const { execSync } = require('child_process');
+
+const repos = ['platform', 'web', 'mobile', 'infra'];
+repos.forEach(repo => {
+execSync(`cd ../${repo} && npm install && npm run prepare && git config core.hooksPath .githooks`);
+});
+console.log('VALORAIPLUS Security Suite deployed to all repos');
