@@ -244,5 +244,3 @@ Use of blockchain anchoring/timestamping **does not** by itself confer legal adm
 * 🤝 Partnerships → `partnerships@`
 
 ---
-
-

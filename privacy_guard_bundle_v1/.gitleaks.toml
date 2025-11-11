@@ -1,0 +1,6 @@
+title = "VALORAIPLUS Privacy Guard"
+
+[[rules]]
+id = "dg-real-name"
+description = "Block commits containing DG real name"
+regex = '''(?i)([D][o][n][n][y][ ][G][i][l][l][s][o][n])'''

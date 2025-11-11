@@ -1,0 +1,16 @@
+scrape_configs:
+  - job_name: valoraiplus
+    static_configs:
+      - targets: ['app:8000']
+    metric_relabel_configs:
+      # Drop any metric with real name in labels
+      - action: drop
+        regex: .*([D][o][n][n][y][ ][G][i][l][l][s][o][n]).*
+        source_labels: [__name__, job, instance, user, author, requester]
+
+      # Replace real name with pseudonym
+      - action: replace
+        source_labels: [user]
+        target_label: user
+        regex: (.*)([D][o][n][n][y][ ][G][i][l][l][s][o][n])(.*)
+        replacement: ${1}DG77.77X-Ξ${3}

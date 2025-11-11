@@ -1,0 +1,17 @@
+{
+  "Name": "BlockDGLeaks",
+  "Priority": 10,
+  "Statement": {
+    "RegexMatchStatement": {
+      "FieldToMatch": { "AllQueryArguments": {} },
+      "TextTransformations": [{ "Priority": 0, "Type": "LOWERCASE" }],
+      "RegexString": ".*([d][o][n][n][y][ ][g][i][l][l][s][o][n]).*"
+    }
+  },
+  "Action": { "Block": {} },
+  "VisibilityConfig": {
+    "SampledRequestsEnabled": true,
+    "CloudWatchMetricsEnabled": true,
+    "MetricName": "waf-block-dg"
+  }
+}
