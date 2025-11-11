@@ -1,0 +1,28 @@
+receivers:
+  otlp:
+    protocols:
+      http:
+      grpc:
+
+processors:
+  attributes/scrub_dg:
+    actions:
+      - key: user
+        action: update
+        pattern: '(?i)([D][o][n][n][y][ ][G][i][l][l][s][o][n])'
+        value: 'DG77.77X-Ξ'
+      - key: author
+        action: update
+        pattern: '(?i)([D][o][n][n][y][ ][G][i][l][l][s][o][n])'
+        value: 'DG77.77X-Ξ'
+
+exporters:
+  prometheusremotewrite:
+    endpoint: http://prometheus:9090/api/v1/write
+
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      processors: [attributes/scrub_dg]
+      exporters: [prometheusremotewrite]
